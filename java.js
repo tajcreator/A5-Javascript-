@@ -26,29 +26,8 @@ document.addEventListener("click", () => {
       }
  }) 
 
-//   let day = document.querySelector('#day');
-// let fullDate = document.querySelector('#fullDate');
-// const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-// const months = [
-//   'Jan',
-//   'Feb',
-//   'Mar',
-//   'April',
-//   'May',
-//   'June',
-//   'July',
-//   'August',
-//   'September',
-//   'October',
-//   'November',
-//   'December',
-// ];
-// const date = new Date();
-// day.innerHTML = `${days[date.getDay()]},`;
-// fullDate.innerHTML = `${months[date.getMonth()]} ${
-//   date.getDate() < 10 ? '0' + date.getDate() : date.getDate()
-// } ${date.getFullYear()}`;
-
+ 
+// date projects
 function formatDate() {
     const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -63,3 +42,63 @@ function formatDate() {
   const { day, fullDate } = formatDate();
   document.querySelector('#day').textContent = day;
   document.querySelector('#fullDate').textContent = fullDate;
+
+  
+
+//   middle point
+const allButtons = document.querySelectorAll('.selectedButton');
+const allTasks = document.querySelectorAll('.cardsItem');
+const completedTask = document.querySelector('#countNumber');
+const totalTasks = document.querySelector('#pointCount');
+const notificationBox = document.querySelector('#historyDocument');
+
+let taskCount = allTasks.length;
+let completeTasksCount = 24;
+let taskDatas = [];
+
+ 
+totalTasks.textContent = taskCount.toString().padStart(2, '0');
+completedTask.textContent = completeTasksCount;
+
+// Function to update  
+function updateUI() {
+  totalTasks.textContent = taskCount.toString().padStart(2, '0');
+  completedTask.textContent = completeTasksCount;
+  notificationBox.innerHTML = taskDatas
+    .map(task => `
+      <div class="w-full bg-[#f4f7ff] p-3 rounded-lg">
+        <h1 class="text-base font-normal">
+          ${'You have completed the task: ' + task.title} at <span>${task.date}</span>
+        </h1>
+      </div>
+    `)
+    .join('');
+}
+
+// Event listener for task completion
+allButtons.forEach(btn => {
+  btn.addEventListener('click', function () {
+    alert('Board updated successfully');
+
+    // Disable button
+    this.disabled = true;
+    this.classList.add('bg-blue-200', 'cursor-not-allowed');
+    this.classList.remove('bg-blue-600');
+
+    // Update counts
+    completeTasksCount++;
+    taskCount = Math.max(0, taskCount - 1);
+
+    // Store task data
+    let taskTitle = this.closest('.cardsItem').querySelector('.title').textContent;
+    taskDatas.push({ title: taskTitle, date: new Date().toLocaleTimeString() });
+
+    // Update UI
+    updateUI();
+
+    // Check if all tasks are completed
+    if ([...allButtons].every(btn => btn.disabled)) {
+      alert('All tasks are completed!');
+    }
+  });
+});
