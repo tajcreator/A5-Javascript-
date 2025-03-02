@@ -19,7 +19,7 @@ document.addEventListener("click", () => {
     });
   });
 
-
+// newpage history
  document.getElementById('change-page').addEventListener('click', function() {
     {
         window.location = '/different.side/newPage.html';
@@ -40,8 +40,8 @@ function formatDate() {
   }
   
   const { day, fullDate } = formatDate();
-  document.querySelector('#day').textContent = day;
-  document.querySelector('#fullDate').textContent = fullDate;
+  document.querySelector('#timeToday').textContent = day;
+  document.querySelector('#allDocument').textContent = fullDate;
 
   
 
@@ -102,3 +102,23 @@ allButtons.forEach(btn => {
     }
   });
 });
+
+// history items
+ document.getElementById('historyFinish').addEventListener('click', function(){ 
+    taskDatas.length = 0;
+    notificationBox.innerHTML = '';
+    allButtons.forEach((btn) => {
+      btn.removeAttribute('disabled');
+      btn.classList.remove('bg-blue-200', 'cursor-not-allowed');
+      btn.classList.add('bg-blue-600');
+    });
+    
+  completeTasksCount = 24;
+  compleTask.textContent = completeTasksCount;
+
+  taskCount = allTasks.length;
+  totalTasks.textContent = taskCount.toString().padStart(2, '0')
+ })
+
+ function backToDashboardAlt() {
+    window.location.replace('/');}
