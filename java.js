@@ -1,5 +1,3 @@
-
-// Rgb
 document.addEventListener("click", () => {
     const body = document.body;
     const themeColors = [
@@ -54,19 +52,19 @@ const completedTask = document.querySelector('#countNumber');
 const totalTasks = document.querySelector('#pointCount');
 const notificationBox = document.querySelector('#historyDocument');
 
-let pointCount = allTasks.length;
+let poinCount = allTasks.length;
 let completeTasksCount = 24;
-let dataElement = [];
+let taskDatas = [];
 
  
-totalTasks.pointCount= pointCount.toString().padStart(2, '0');
+totalTasks.textContent = poinCount.toString().padStart(2, '0');
 completedTask.textContent = completeTasksCount;
 
 // Function to update  
 function updateUI() {
-  totalTasks.textContent = pointCount.toString().padStart(2, '0');
+  totalTasks.textContent = poinCount.toString().padStart(2, '0');
   completedTask.textContent = completeTasksCount;
-  notificationBox.innerHTML =  dataElement
+  notificationBox.innerHTML = taskDatas
     .map(task => `
       <div class="w-full bg-[#f4f7ff] p-3 rounded-lg">
         <h1 class="text-base font-normal">
@@ -89,13 +87,13 @@ allButtons.forEach(btn => {
 
     // Update counts
     completeTasksCount++;
-    taskCount = Math.max(0, taskCount - 1);
+    poinCount  = Math.max(0, poinCount  - 1);
 
     // Store task data
     let taskTitle = this.closest('.cardsItem').querySelector('.title').textContent;
     taskDatas.push({ title: taskTitle, date: new Date().toLocaleTimeString() });
 
-
+    // Update UI
     updateUI();
 
     // Check if all tasks are completed
@@ -118,8 +116,8 @@ allButtons.forEach(btn => {
   completeTasksCount = 24;
   compleTask.textContent = completeTasksCount;
 
-  taskCount = allTasks.length;
-  totalTasks.textContent = taskCount.toString().padStart(2, '0')
+  poinCount  = allTasks.length;
+  totalTasks.textContent = poinCount.toString().padStart(2, '0')
  })
 
  function backToDashboardAlt() {
