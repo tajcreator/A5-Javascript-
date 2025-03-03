@@ -22,7 +22,7 @@ document.addEventListener("click", () => {
 // newpage history
  document.getElementById('change-page').addEventListener('click', function() {
     {
-        window.location = '/different.side/newPage.html';
+        window.location.href = 'newPage.html';
       }
  }) 
 
