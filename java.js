@@ -20,11 +20,12 @@ document.addEventListener("click", () => {
   });
 
 // newpage history
- document.getElementById('change-page').addEventListener('click', function() {
-    {
-        window.location.href = 'newPage.html';
-      }
- }) 
+document.getElementById('change-page').addEventListener('click', function() {
+  {
+      window.location.href = 'newPage.html';
+    }
+}) 
+
 
  
 // date projects
